@@ -3,13 +3,16 @@
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import DitherCanvas, { type DitherHandle } from "@/lib/dither/DitherCanvas";
 import { ScrollTrigger, prefersReducedMotion } from "@/lib/gsap";
-import { IMG, PRACTICE_AREAS } from "@/lib/content";
+import { useLang } from "@/lib/i18n";
+import { IMG } from "@/lib/content";
 import styles from "./CtaForm.module.css";
 
 type Status = "idle" | "error" | "sent";
 
-/** CTA principal: solicitud de acreditación — card de papel con sello. */
+/** CTA principal: solicitar la llamada con Henry — card de papel con sello. */
 export default function CtaForm() {
+  const { dict } = useLang();
+  const t = dict.cta;
   const [status, setStatus] = useState<Status>("idle");
   const rootRef = useRef<HTMLElement>(null);
   const archRef = useRef<DitherHandle>(null);
@@ -60,36 +63,39 @@ export default function CtaForm() {
         src={IMG.arch}
         mode="dark"
         className={styles.arch}
-        label="Arco Delicado de Utah en arte de tramas"
+        label={t.sceneLabel}
         layers={[
           { y: 1, h: 0, blackPoint: 60, whitePoint: 150, xSquares: 110, ySquares: 90, bgOpacity: 0 },
         ]}
       />
       <div className={styles.head}>
-        <p className="section-label t-p6">Solicitud de acreditación</p>
+        <p className="section-label t-p6">{t.label}</p>
         <h2 className="t-h2" data-reveal="h">
-          Tu lugar en la red está <em>abierto</em>
+          {t.titleA}
+          <em>{t.titleEm}</em>
         </h2>
         <p className={`t-p4 t-muted ${styles.sub}`} data-reveal="p">
-          Cupos por cohortes: verificamos cada licencia, porque la red vale lo
-          que valen sus abogados. Respuesta en menos de 72 horas.
+          {t.sub}
+        </p>
+        <p className={`t-p5 ${styles.direct}`} data-reveal="ctn">
+          {t.direct}
         </p>
       </div>
 
-      <div className={styles.paper} data-reveal="ctn">
+      <div className={styles.paper} data-reveal="ctn" data-form-title={t.formTitle}>
         {status === "sent" ? (
           <div className={styles.sentBox} role="status">
-            <span className={`${styles.stamp} t-p2`}>En cola</span>
-            <p className="t-p4">
-              Tu solicitud entró a la cola de acreditación. Verificamos tu
-              licencia y te contactamos en menos de 72 horas.
+            <span className={`${styles.stamp} t-p2`}>{t.sentStamp}</span>
+            <p className="t-p4">{t.sentBody}</p>
+            <p className="t-p6 t-muted">
+              {t.sentFolio}
+              {Date.now() % 10000}
             </p>
-            <p className="t-p6 t-muted">Folio AB-2026-{Date.now() % 10000}</p>
           </div>
         ) : (
           <form className={styles.form} onSubmit={handleSubmit} noValidate>
             <label className={styles.field}>
-              <span className="t-p6 t-muted">01 — Nombre completo</span>
+              <span className="t-p6 t-muted">{t.fields.name}</span>
               <input
                 name="name"
                 type="text"
@@ -97,55 +103,54 @@ export default function CtaForm() {
                 minLength={2}
                 autoComplete="name"
                 className={`t-p3 ${styles.input}`}
-                placeholder="Escribe aquí"
+                placeholder={t.fields.namePh}
               />
             </label>
             <label className={styles.field}>
-              <span className="t-p6 t-muted">02 — Email profesional</span>
+              <span className="t-p6 t-muted">{t.fields.email}</span>
               <input
                 name="email"
                 type="email"
                 required
                 autoComplete="email"
                 className={`t-p3 ${styles.input}`}
-                placeholder="tu@bufete.com"
+                placeholder={t.fields.emailPh}
               />
             </label>
             <label className={styles.field}>
-              <span className="t-p6 t-muted">
-                03 — Nº de licencia (bar) y estado
-              </span>
+              <span className="t-p6 t-muted">{t.fields.bar}</span>
               <input
                 name="bar"
                 type="text"
                 required
                 minLength={3}
                 className={`t-p3 ${styles.input}`}
-                placeholder="Ej. 123456 — Texas"
+                placeholder={t.fields.barPh}
               />
             </label>
             <label className={styles.field}>
-              <span className="t-p6 t-muted">04 — Área de práctica principal</span>
-              <select name="area" className={`t-p3 ${styles.input}`}>
-                {PRACTICE_AREAS.map((area) => (
-                  <option key={area.id} value={area.id}>
-                    {area.label}
+              <span className="t-p6 t-muted">{t.fields.time}</span>
+              <select name="time" className={`t-p3 ${styles.input}`}>
+                {t.fields.times.map((slot) => (
+                  <option key={slot} value={slot}>
+                    {slot}
                   </option>
                 ))}
               </select>
             </label>
             {status === "error" && (
               <p className={`t-p5 t-stamp`} role="alert">
-                [ ! ] Revisa tu nombre y número de licencia — sin ellos no
-                podemos acreditarte.
+                {t.error}
               </p>
             )}
-            <button type="submit" className={`btn ${styles.submit}`} data-magnetic="20">
-              Solicitar acceso →
+            <button
+              type="submit"
+              className={`btn ${styles.submit}`}
+              data-magnetic="20"
+            >
+              {t.submit}
             </button>
-            <p className="t-p6 t-muted">
-              Datos protegidos. Solo usamos tu licencia para la verificación.
-            </p>
+            <p className="t-p6 t-muted">{t.privacy}</p>
           </form>
         )}
       </div>

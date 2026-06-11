@@ -4,18 +4,21 @@ import { useEffect, useRef } from "react";
 import DitherCanvas, { type DitherHandle } from "@/lib/dither/DitherCanvas";
 import RotatingBadge from "@/components/fx/RotatingBadge";
 import { gsap, ScrollTrigger, DUR, prefersReducedMotion } from "@/lib/gsap";
+import { useLang } from "@/lib/i18n";
+import { scrollToTarget } from "@/lib/scroll-bus";
 import { IMG } from "@/lib/content";
 import styles from "./Hero.module.css";
 
 /**
- * Hero pinned: arte dither que se teje al entrar, glitch, wordmark
- * pixel y shrink-to-frame al scrollear (firma de sondaven).
+ * Hero de la convocatoria: la balanza de la justicia tejida en tramas,
+ * glitch que sigue al cursor, lockup pixel y CTA directo a la llamada.
  */
 export default function Hero() {
+  const { dict } = useLang();
   const outerRef = useRef<HTMLElement>(null);
   const ditherRef = useRef<DitherHandle>(null);
 
-  /* tejido de entrada: la estatua aparece barriendo de arriba a abajo */
+  /* tejido de entrada: la balanza aparece barriendo de arriba a abajo */
   useEffect(() => {
     const outer = outerRef.current;
     if (!outer) return;
@@ -96,10 +99,11 @@ export default function Hero() {
             src={IMG.hero}
             mode="dark"
             glitch
+            interactive
             className={styles.canvas}
-            label="Estatua de la Libertad en arte de tramas"
+            label={dict.hero.sceneLabel}
             layers={[
-              { h: 0, blackPoint: 35, whitePoint: 165, xSquares: 150, ySquares: 120 },
+              { h: 0, blackPoint: 55, whitePoint: 150, xSquares: 150, ySquares: 130 },
             ]}
           />
           <div className={styles.scrim} aria-hidden="true" />
@@ -107,13 +111,10 @@ export default function Hero() {
 
         <div className={styles.content}>
           <p className="t-p3" data-reveal="type">
-            Red de revisión legal para abogados de inmigración
+            {dict.hero.kicker}
           </p>
           <h1 className={styles.lockup}>
-            <span
-              className={`t-wordmark ${styles.title}`}
-              data-reveal="chars"
-            >
+            <span className={`t-wordmark ${styles.title}`} data-reveal="chars">
               Usalatino
             </span>
             <em className={styles.prime} data-reveal="ctn" data-reveal-delay="0.8">
@@ -121,33 +122,41 @@ export default function Hero() {
             </em>
           </h1>
           <div className={styles.labels}>
-            <p className="t-p6" data-reveal="ctn" data-reveal-delay="0.5">
-              Expedientes listos
-              <br />
-              pre-revisados con IA
-            </p>
-            <p className="t-p6" data-reveal="ctn" data-reveal-delay="0.6">
-              Tu veredicto
-              <br />
-              tu tarifa
-            </p>
-            <p className="t-p6" data-reveal="ctn" data-reveal-delay="0.7">
-              100% remoto
-              <br />
-              Sede en Utah
-            </p>
+            {dict.hero.labels.map((pair, i) => (
+              <p
+                key={pair[0]}
+                className="t-p6"
+                data-reveal="ctn"
+                data-reveal-delay={String(0.5 + i * 0.1)}
+              >
+                {pair[0]}
+                <br />
+                {pair[1]}
+              </p>
+            ))}
+          </div>
+          <div className={styles.ctas} data-reveal="ctn" data-reveal-delay="0.9">
+            <button
+              className="btn btn--gold"
+              data-magnetic="22"
+              onClick={() => scrollToTarget("#consulta")}
+            >
+              {dict.hero.cta1}
+            </button>
+            <button
+              className="btn btn--ghost"
+              onClick={() => scrollToTarget("#plataforma")}
+            >
+              {dict.hero.cta2}
+            </button>
           </div>
         </div>
 
         <div className={styles.aside}>
-          <div className={styles.hint} data-reveal="ctn" data-reveal-delay="0.9">
+          <div className={styles.hint} data-reveal="ctn" data-reveal-delay="1.1">
             <span className={styles.barcode} aria-hidden="true" />
-            <span className="t-p6 t-muted">Desplaza para abrir el expediente</span>
           </div>
-          <RotatingBadge
-            text="Únete a la red — cupos por cohortes"
-            className={styles.badge}
-          />
+          <RotatingBadge text={dict.hero.badge} className={styles.badge} />
         </div>
       </div>
     </section>

@@ -1,0 +1,188 @@
+/** Diccionario EN — idioma principal (la mayoría de abogados son estadounidenses). */
+
+export const en = {
+  langModal: {
+    title: "Welcome · Bienvenido",
+    question: "Choose your language",
+    questionAlt: "Elige tu idioma",
+    note: "You can switch anytime · Puedes cambiarlo cuando quieras",
+  },
+  preloader: {
+    sub: "Legal review network · Salt Lake City, UT",
+    preparing: "Preparing your panel",
+  },
+  nav: {
+    links: [
+      { label: "Platform", target: "#plataforma" },
+      { label: "Requirements", target: "#requisitos" },
+      { label: "Process", target: "#proceso" },
+      { label: "FAQ", target: "#preguntas" },
+    ],
+    cta: "Book a call",
+    file: "EXP № 2026-ULP",
+  },
+  hero: {
+    kicker: "An open call for U.S. attorneys",
+    labels: [
+      ["Freelance from home", "on your schedule"],
+      ["Cases assigned to you", "files in English"],
+      ["Paid per case", "real extra income"],
+    ],
+    badge: "Book a call with Henry — join the network —",
+    cta1: "Book a call with Henry →",
+    cta2: "How it works",
+    sceneLabel: "Scales of justice drawn in woven bars",
+  },
+  vision: {
+    label: "Who we are",
+    statementA: "Millions of Latino families in the U.S. face immigration paperwork alone — not because help doesn't exist, but because it's out of reach. We exist to ",
+    statementEm: "close that gap",
+    statementB: ".",
+    visionLabel: "Our vision",
+    visionLine: "Every Latino family, one validated case file away from clarity.",
+    body1:
+      "Usalatino Prime is a legal-tech company incorporated in Salt Lake City, Utah. Our platform prepares and pre-reviews immigration case files with AI — and licensed attorneys give every file its final, human word.",
+    body2:
+      "We're building a network of freelance attorneys who believe access to legal guidance shouldn't depend on a family's zip code or budget. Your license can open doors — from your living room.",
+    facts: ["Incorporated in Utah", "Tech prepares, lawyers decide", "Paid per case"],
+    sceneLabel: "A community crowd drawn in woven bars",
+  },
+  manifesto: {
+    lines: [
+      { pre: "The AI", em: "prepares" },
+      { pre: "You", em: "decide" },
+      { pre: "We", em: "pay" },
+    ],
+    tag: "✦ Legal review of immigration case files · abogados.usalatinoprime.com",
+  },
+  platform: {
+    label: "The platform",
+    titleA: "Freelance without the ",
+    titleEm: "friction",
+    cards: [
+      { code: "QUEUE", title: "Assigned queue", copy: "Cases land in your queue ready to review. No hunting for clients, no business development." },
+      { code: "AI", title: "AI pre-review", copy: "Every file arrives analyzed against the service playbook, flagged green, amber or red." },
+      { code: "SPLIT", title: "Split-screen review", copy: "Documents on one side, checklist on the other. Files arrive complete — or they don't arrive." },
+      { code: "SIGN", title: "One-click verdict", copy: "Validate or return with structured findings. The origin team gets your decision instantly." },
+      { code: "USD", title: "Clear earnings", copy: "The fee is visible before you take a case. Real-time earnings panel, on-time payouts." },
+      { code: "KPI", title: "Your metrics", copy: "Turnaround, volume, precision — your reputation in the network, measurable and yours." },
+    ],
+  },
+  requirements: {
+    label: "Requirements",
+    titleA: "What you ",
+    titleEm: "need",
+    items: [
+      { title: "An active bar license", copy: "Any U.S. state — immigration law is federal." },
+      { title: "No immigration experience", copy: "Not required. Our playbooks and checklists guide every review." },
+      { title: "English for the files", copy: "Every case file you review is written in English." },
+      { title: "Spanish is a plus", copy: "Not a requirement — but it brings you closer to the community we serve." },
+      { title: "A few hours a week", copy: "From home, on your schedule. No minimum caseload." },
+    ],
+  },
+  process: {
+    label: "How you join",
+    titleA: "From your license to your first ",
+    titleEm: "verdict",
+    steps: [
+      { n: "01", title: "Book a call", copy: "Twenty minutes with Henry, our founder. He walks you through the model and answers everything." },
+      { n: "02", title: "Get verified", copy: "We confirm your bar license. That's it — no interviews, no portfolio." },
+      { n: "03", title: "Onboard in an hour", copy: "Learn the playbook-based review. Your first cases are assigned to your queue." },
+      { n: "04", title: "Review & get paid", copy: "From home, when it suits you. Every verdict pays out." },
+    ],
+  },
+  stats: {
+    label: "The numbers",
+    items: [
+      { value: 90, suffix: "", label: "USD per case (base fee)" },
+      { value: 15, suffix: " min", label: "Average per case file" },
+      { value: 48, suffix: " h", label: "Max turnaround per verdict" },
+      { value: 100, suffix: "%", label: "Remote, wherever you are" },
+    ],
+    sceneLabel: "Utah beehive drawn in woven bars",
+  },
+  modules: {
+    label: "Inside",
+    titleA: "Your day, inside the ",
+    titleEm: "panel",
+    tabsLabel: "Modules",
+    essential: "The essentials",
+    tabs: [
+      {
+        id: "queue", label: "The queue", big: "Ready", code: "QUEUE",
+        chips: ["Assigned to you", "Locked while you review", "Auto-release", "No minimums"],
+        copy: "Cases are assigned straight to your queue, pre-packaged and ready. A case locks while you work it; if you let it go, it returns to the pool.",
+      },
+      {
+        id: "review", label: "The review", big: "Split", code: "REV",
+        chips: ["Playbook checklist", "Green-amber-red flag", "AI findings marked", "Full history"],
+        copy: "Documents on the left, the service checklist on the right, AI findings highlighted. Your time goes to judgment, not logistics.",
+      },
+      {
+        id: "verdict", label: "The verdict", big: "Yours", code: "SIGN",
+        chips: ["Validate", "Request corrections", "Structured findings", "Instant delivery"],
+        copy: "The AI suggests, you sign. Validate or return with corrections — the origin team receives your decision the moment you make it.",
+      },
+      {
+        id: "earnings", label: "The earnings", big: "Daily", code: "USD",
+        chips: ["Fee per review", "On-time cycles", "Payout history", "Personal metrics"],
+        copy: "Every review shows its fee before you take it. Your panel tracks what you've earned, what's pending and every payout cycle.",
+      },
+    ],
+  },
+  testimonials: {
+    label: "The network speaks",
+    stamp: "[ Active reviewer ]",
+    items: [
+      { quote: "I review two files with my morning coffee. The AI sets the table; I bring the judgment.", name: "Andrea T.", detail: "Immigration attorney · Houston, TX" },
+      { quote: "Split-screen saves me the worst part of the job: chasing documents. Files arrive complete or not at all.", name: "Marco V.", detail: "Humanitarian practice · Phoenix, AZ" },
+      { quote: "I get paid for legal judgment, not office hours. And my metrics speak for me.", name: "Silvia R.", detail: "Family & SIJS · Salt Lake City, UT" },
+    ],
+  },
+  cta: {
+    label: "The next cohort",
+    titleA: "Your seat is ",
+    titleEm: "open",
+    sub: "We verify every license — the network is worth what its attorneys are worth. Henry answers within 72 hours.",
+    formTitle: "FORM ULP-AB · CALL REQUEST",
+    fields: {
+      name: "01 — Full name",
+      namePh: "Type here",
+      email: "02 — Professional email",
+      emailPh: "you@firm.com",
+      bar: "03 — Bar number & state",
+      barPh: "e.g. 123456 — Texas",
+      time: "04 — Best time for a call",
+      times: ["Mornings", "Afternoons", "Evenings"],
+    },
+    error: "[ ! ] Check your name and bar number — we need them to verify you.",
+    submit: "Request my call →",
+    privacy: "Your data is protected. We only use your license for verification.",
+    sentStamp: "Scheduled",
+    sentBody: "You're on Henry's list. Expect an email within 72 hours to pick a time.",
+    sentFolio: "File AB-2026-",
+    direct: "Prefer right now? Write to henry@usalatinoprime.com",
+    sceneLabel: "Delicate Arch drawn in woven bars",
+  },
+  faq: {
+    label: "Questions from colleagues",
+    titleA: "Straight ",
+    titleEm: "answers",
+    items: [
+      { q: "How much do I earn per case?", a: "Each service shows its fee before you take the case — the base is $90 per verdict. You're paid per review, with on-time payout cycles and full history in your earnings panel." },
+      { q: "Do I need immigration experience?", a: "No. You need an active bar license; our playbooks and the AI pre-review guide the rest. Your legal judgment is what we're hiring." },
+      { q: "Do I need to speak Spanish?", a: "No — every case file is in English. Spanish is a welcome plus: it connects you with the community we serve." },
+      { q: "How many cases must I take?", a: "None. There are no minimums. Cases are assigned to your queue and you take what fits your week." },
+      { q: "Is this employment?", a: "No — it's freelance work, paid per case. You keep your practice, your hours and your independence." },
+      { q: "Who is Usalatino Prime?", a: "A legal-tech company incorporated in Salt Lake City, Utah, on a mission to make immigration guidance accessible to the Latino community." },
+    ],
+  },
+  footer: {
+    network: "The network",
+    networkItems: ["Salt Lake City, UT — HQ", "100% remote network", "Attorneys in 50 states"],
+    follow: "Follow us",
+    copyright: "© 2026 Usalatino Prime · Utah",
+    disclaimer: "Professional review platform — active license required",
+    sceneLabel: "A gavel drawn in woven bars",
+  },
+};

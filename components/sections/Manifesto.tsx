@@ -3,16 +3,14 @@
 import { useEffect, useRef } from "react";
 import DitherCanvas from "@/lib/dither/DitherCanvas";
 import { gsap, prefersReducedMotion } from "@/lib/gsap";
+import { useLang } from "@/lib/i18n";
 import styles from "./Manifesto.module.css";
 
-const LINES = [
-  { pre: "La IA", em: "prepara", drift: -14 },
-  { pre: "Tú", em: "decides", drift: 10 },
-  { pre: "Nosotros", em: "pagamos", drift: -10 },
-] as const;
+const DRIFTS = [-14, 10, -10] as const;
 
 /** Manifiesto: líneas display gigantes que derivan en direcciones opuestas. */
 export default function Manifesto() {
+  const { dict } = useLang();
   const rootRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -53,18 +51,18 @@ export default function Manifesto() {
         ]}
       />
       <div className={styles.lines}>
-        {LINES.map((line, i) => (
+        {dict.manifesto.lines.map((line, i) => (
           <p
             key={line.em}
             className={`t-display ${styles.line} ${styles[`line${i}` as "line0"]}`}
-            data-drift={line.drift}
+            data-drift={DRIFTS[i]}
           >
             {line.pre} <em>{line.em}</em>
           </p>
         ))}
       </div>
       <p className={`t-p6 t-muted ${styles.tag}`} data-reveal="ctn">
-        ✦ Revisión legal de expedientes migratorios · abogados.usalatinoprime.com
+        {dict.manifesto.tag}
       </p>
     </section>
   );

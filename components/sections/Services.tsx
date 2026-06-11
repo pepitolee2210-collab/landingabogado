@@ -2,11 +2,13 @@
 
 import { useEffect, useRef } from "react";
 import { gsap, prefersReducedMotion } from "@/lib/gsap";
-import { SERVICES } from "@/lib/content";
+import { useLang } from "@/lib/i18n";
 import styles from "./Services.module.css";
 
-/** Áreas de práctica — galería horizontal conducida por el scroll. */
+/** La plataforma — galería horizontal conducida por el scroll. */
 export default function Services() {
+  const { dict } = useLang();
+  const cards = dict.platform.cards;
   const rootRef = useRef<HTMLElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
   const indexRef = useRef<HTMLSpanElement>(null);
@@ -29,7 +31,7 @@ export default function Services() {
           scrub: 0.4,
           invalidateOnRefresh: true,
           onUpdate(self) {
-            const current = 1 + Math.round(self.progress * (SERVICES.length - 1));
+            const current = 1 + Math.round(self.progress * (cards.length - 1));
             if (indexRef.current) {
               indexRef.current.textContent = String(current).padStart(2, "0");
             }
@@ -42,6 +44,7 @@ export default function Services() {
     }, root);
 
     return () => ctx.revert();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -54,19 +57,20 @@ export default function Services() {
       <div className="comb" aria-hidden="true" />
       <div className={styles.sticky}>
         <header className={`${styles.head} shell`}>
-          <p className="section-label t-p6">La plataforma</p>
+          <p className="section-label t-p6">{dict.platform.label}</p>
           <h2 className="t-h2" data-reveal="h">
-            Un panel que respeta tu <em>criterio</em>
+            {dict.platform.titleA}
+            <em>{dict.platform.titleEm}</em>
           </h2>
         </header>
 
         <div ref={trackRef} className={styles.track}>
-          {SERVICES.map((service, i) => (
+          {cards.map((service, i) => (
             <article key={service.code} className={styles.card}>
               <div className={styles.cardTop}>
                 <span className="chip t-p6">{service.code}</span>
                 <span className="t-p6 t-muted">
-                  {String(i + 1).padStart(2, "0")} / {SERVICES.length}
+                  {String(i + 1).padStart(2, "0")} / {cards.length}
                 </span>
               </div>
               <h3 className="t-h4">{service.title}</h3>
@@ -80,7 +84,7 @@ export default function Services() {
 
         <div className={styles.progress} aria-hidden="true">
           <span className="t-p5">
-            <span ref={indexRef}>01</span> / {String(SERVICES.length).padStart(2, "0")}
+            <span ref={indexRef}>01</span> / {String(cards.length).padStart(2, "0")}
           </span>
           <span className={styles.progressLine}>
             <span ref={lineRef} className={styles.progressFill} />

@@ -1,0 +1,82 @@
+.root {
+  position: fixed;
+  inset: 0;
+  z-index: 120;
+  display: grid;
+  place-items: center;
+  background: rgba(15, 33, 72, 0.55);
+  animation: modal-in var(--dur-m) var(--ease-out);
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--u-16);
+  background: var(--paper);
+  color: var(--ink);
+  padding: var(--u-48) var(--u-72);
+  box-shadow: 0.6rem 0.6rem 0 rgba(243, 178, 41, 0.35);
+  text-align: center;
+  animation: card-in var(--dur-l) var(--ease-out);
+}
+
+.card::before {
+  content: "FORM ULP-00 · LANGUAGE / IDIOMA";
+  font-size: 0.694rem;
+  letter-spacing: 0.14em;
+  opacity: 0.5;
+  border-bottom: 1px solid var(--ink-30);
+  padding-bottom: var(--u-8);
+  margin-bottom: var(--u-8);
+}
+
+.title em {
+  font-style: italic;
+  text-transform: lowercase;
+  color: var(--rock);
+}
+
+.alt {
+  margin-top: calc(var(--u-8) * -1);
+}
+
+.buttons {
+  display: flex;
+  gap: var(--u-16);
+  margin-top: var(--u-16);
+}
+
+.btnEs {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.note {
+  margin-top: var(--u-8);
+}
+
+@keyframes modal-in {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes card-in {
+  from {
+    opacity: 0;
+    transform: translateY(2rem) scale(0.96);
+  }
+}
+
+@media (max-width: 767px) {
+  .card {
+    padding: var(--u-32);
+    margin-inline: var(--u-16);
+  }
+
+  .buttons {
+    flex-direction: column;
+    width: 100%;
+  }
+}

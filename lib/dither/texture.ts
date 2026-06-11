@@ -4,16 +4,37 @@
  * para que la escena dither nunca quede vacía.
  */
 
+import { drawCrowd, drawGavel, drawScales } from "./shapes";
+
 export type TextureSource = {
   source: TexImageSource;
   width: number;
   height: number;
 };
 
+/** Renderiza una forma del storyboard; `noise` rompe siluetas planas en tramas. */
+function shapeTexture(
+  draw: (ctx: CanvasRenderingContext2D, w: number, h: number) => void,
+  W: number,
+  H: number,
+  noise: boolean,
+): TextureSource {
+  const canvas = document.createElement("canvas");
+  canvas.width = W;
+  canvas.height = H;
+  const ctx = canvas.getContext("2d")!;
+  draw(ctx, W, H);
+  if (noise) noisify(ctx, W, H);
+  return { source: canvas, width: W, height: H };
+}
+
 export function loadImageTexture(src: string): Promise<TextureSource> {
   if (src.startsWith("procedural:")) {
     if (src.includes("arch")) return Promise.resolve(archTexture());
     if (src.includes("beehive")) return Promise.resolve(beehiveTexture());
+    if (src.includes("scales")) return Promise.resolve(shapeTexture(drawScales, 640, 800, true));
+    if (src.includes("crowd")) return Promise.resolve(shapeTexture(drawCrowd, 880, 480, false));
+    if (src.includes("gavel")) return Promise.resolve(shapeTexture(drawGavel, 640, 480, true));
     return Promise.resolve(proceduralTexture(src));
   }
   return new Promise((resolve) => {

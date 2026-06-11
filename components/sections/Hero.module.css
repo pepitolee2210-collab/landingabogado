@@ -79,6 +79,12 @@
   text-align: left;
 }
 
+.ctas {
+  display: flex;
+  gap: var(--u-16);
+  margin-top: var(--u-32);
+}
+
 .labels p:nth-child(2) {
   text-align: center;
 }

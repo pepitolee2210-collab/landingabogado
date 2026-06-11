@@ -3,13 +3,16 @@
 import { useEffect, useRef } from "react";
 import DitherCanvas, { type DitherHandle } from "@/lib/dither/DitherCanvas";
 import { ScrollTrigger, prefersReducedMotion } from "@/lib/gsap";
-import { IMG, STATS } from "@/lib/content";
+import { useLang } from "@/lib/i18n";
+import { IMG } from "@/lib/content";
 import styles from "./Stats.module.css";
 
 const HIVE = { x: 0.58, w: 0.38, y: 0.08, maxH: 0.88 };
 
-/** Resultados: contadores + colmena de Utah que se teje con el scroll. */
+/** Los números: contadores + colmena de Utah que se teje con el scroll. */
 export default function Stats() {
+  const { dict } = useLang();
+  const t = dict.stats;
   const rootRef = useRef<HTMLElement>(null);
   const ditherRef = useRef<DitherHandle>(null);
 
@@ -41,15 +44,15 @@ export default function Stats() {
         src={IMG.stats}
         mode="dark"
         className={styles.scene}
-        label="Colmena de Utah en arte de tramas"
+        label={t.sceneLabel}
         layers={[
           { x: HIVE.x, w: HIVE.w, y: HIVE.y, h: 0, blackPoint: 60, whitePoint: 150, xSquares: 90, ySquares: 110, bgOpacity: 0 },
         ]}
       />
       <div className={`${styles.inner} shell`}>
-        <p className="section-label t-p6">Los números de la red</p>
+        <p className="section-label t-p6">{t.label}</p>
         <dl className={styles.grid}>
-          {STATS.map((stat) => (
+          {t.items.map((stat) => (
             <div key={stat.label} className={styles.cell}>
               <dt className={`t-p5 t-muted ${styles.label}`} data-reveal="ctn">
                 {stat.label}

@@ -1,23 +1,26 @@
 "use client";
 
 import { useState } from "react";
-import { FAQS } from "@/lib/content";
+import { useLang } from "@/lib/i18n";
 import styles from "./Faq.module.css";
 
-/** Preguntas frecuentes — acordeón numerado estilo formulario. */
+/** Preguntas de colegas — acordeón numerado estilo formulario. */
 export default function Faq() {
+  const { dict } = useLang();
+  const t = dict.faq;
   const [open, setOpen] = useState<number | null>(0);
 
   return (
     <section id="preguntas" data-theme="light" className={`${styles.root} shell`}>
       <div className="comb" aria-hidden="true" />
-      <p className="section-label t-p6">Preguntas de colegas</p>
+      <p className="section-label t-p6">{t.label}</p>
       <h2 className={`t-h2 ${styles.title}`} data-reveal="h">
-        Respuestas <em>claras</em>
+        {t.titleA}
+        <em>{t.titleEm}</em>
       </h2>
 
       <div className={styles.list}>
-        {FAQS.map((faq, i) => {
+        {t.items.map((faq, i) => {
           const isOpen = open === i;
           return (
             <div key={faq.q} className={styles.item}>

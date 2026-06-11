@@ -1,0 +1,78 @@
+.root {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--u-72);
+  padding-block: var(--u-136) calc(var(--u-136) * 1.4);
+  overflow: clip;
+}
+
+.scene {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+.statement {
+  position: relative;
+  max-width: 64rem;
+  text-align: center;
+}
+
+.grid {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: var(--u-72);
+  width: 100%;
+  max-width: 86rem;
+  border-top: 1px solid var(--paper-30);
+  padding-top: var(--u-48);
+}
+
+.visionCol {
+  display: flex;
+  flex-direction: column;
+  gap: var(--u-16);
+}
+
+.visionLine {
+  font-family: var(--font-serif), serif;
+  font-style: italic;
+  font-size: 2.5rem; /* 36 */
+  line-height: 1.15;
+  color: var(--gold);
+}
+
+.bodyCol {
+  display: flex;
+  flex-direction: column;
+  gap: var(--u-24);
+}
+
+.bodyCol p {
+  text-transform: none;
+  max-width: 56ch;
+}
+
+.facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--u-8);
+  margin-top: var(--u-8);
+}
+
+@media (max-width: 767px) {
+  .grid {
+    grid-template-columns: 1fr;
+    gap: var(--u-32);
+  }
+
+  .visionLine {
+    font-size: 1.7rem;
+  }
+}

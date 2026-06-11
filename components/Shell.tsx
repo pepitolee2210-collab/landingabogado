@@ -1,8 +1,16 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import Lenis from "lenis";
 import { gsap, ScrollTrigger, setupGsap, prefersReducedMotion } from "@/lib/gsap";
+import {
+  DICTS,
+  LangContext,
+  readStoredLang,
+  storeLang,
+  type Lang,
+} from "@/lib/i18n";
+import { registerLenis } from "@/lib/scroll-bus";
 import {
   initReveals,
   initHighlights,
@@ -12,30 +20,40 @@ import {
 } from "@/lib/anim/reveals";
 import { initMagnetic } from "@/lib/anim/magnetic";
 import Preloader from "@/components/Preloader";
+import LangModal from "@/components/LangModal";
 import Header from "@/components/Header";
 import Cursor from "@/components/fx/Cursor";
 import ScrollProgress from "@/components/fx/ScrollProgress";
 
 /**
- * Raíz cliente: gestiona preloader, Lenis y la inicialización
- * de todas las animaciones declarativas una vez cargada la página.
+ * Raíz cliente: idioma (modal de entrada + contexto), preloader con
+ * compuerta de idioma, Lenis y animaciones declarativas.
  */
 export default function Shell({ children }: { children: React.ReactNode }) {
+  const [lang, setLangState] = useState<Lang>("en");
+  /* null = aún no sabemos; false = primera visita (mostrar modal); true = elegido */
+  const [chosen, setChosen] = useState<boolean | null>(null);
   const [loading, setLoading] = useState(true);
   const mainRef = useRef<HTMLDivElement>(null);
   const lenisRef = useRef<Lenis | null>(null);
 
   useEffect(() => {
-    setupGsap();
-    const scope = mainRef.current;
-    if (!scope) return;
+    const stored = readStoredLang();
+    if (stored) {
+      setLangState(stored);
+      setChosen(true);
+    } else {
+      setChosen(false);
+    }
+  }, []);
 
+  useEffect(() => {
+    setupGsap();
     if (prefersReducedMotion()) {
       document.documentElement.classList.add("reduced-motion");
-      revealAllStatic(scope);
+      if (mainRef.current) revealAllStatic(mainRef.current);
       return;
     }
-
     const lenis = new Lenis({
       duration: 1.2,
       smoothWheel: true,
@@ -43,6 +61,7 @@ export default function Shell({ children }: { children: React.ReactNode }) {
       easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
     });
     lenisRef.current = lenis;
+    registerLenis(lenis);
     lenis.stop();
     lenis.on("scroll", ScrollTrigger.update);
     gsap.ticker.add((time) => lenis.raf(time * 1000));
@@ -51,9 +70,24 @@ export default function Shell({ children }: { children: React.ReactNode }) {
     return () => {
       lenis.destroy();
       lenisRef.current = null;
+      registerLenis(null);
       ScrollTrigger.getAll().forEach((st) => st.kill());
     };
   }, []);
+
+  const setLang = (next: Lang) => {
+    setLangState(next);
+    storeLang(next);
+  };
+
+  useEffect(() => {
+    document.documentElement.lang = lang;
+  }, [lang]);
+
+  const handleChoose = (next: Lang) => {
+    setLang(next);
+    setChosen(true);
+  };
 
   const handleReady = () => {
     setLoading(false);
@@ -70,19 +104,19 @@ export default function Shell({ children }: { children: React.ReactNode }) {
     window.dispatchEvent(new CustomEvent("app:ready"));
   };
 
-  const scrollTo = (selector: string) => {
-    const lenis = lenisRef.current;
-    if (lenis) lenis.scrollTo(selector, { duration: 1.6 });
-    else document.querySelector(selector)?.scrollIntoView({ behavior: "smooth" });
-  };
+  const ctx = useMemo(
+    () => ({ lang, dict: DICTS[lang], setLang }),
+    [lang],
+  );
 
   return (
-    <>
-      {loading && <Preloader onDone={handleReady} />}
+    <LangContext.Provider value={ctx}>
+      {loading && <Preloader gate={chosen === true} onDone={handleReady} />}
+      {chosen === false && <LangModal onChoose={handleChoose} />}
       <Cursor />
       <ScrollProgress />
-      <Header onNavigate={scrollTo} />
+      <Header />
       <div ref={mainRef}>{children}</div>
-    </>
+    </LangContext.Provider>
   );
 }

@@ -15,9 +15,9 @@ const doto = Doto({
 });
 
 export const metadata: Metadata = {
-  title: "Usalatino Prime · Abogados — Red de revisión legal migratoria",
+  title: "Usalatino Prime — Freelance legal review for U.S. attorneys",
   description:
-    "Únete a la red de abogados revisores: expedientes migratorios pre-analizados con IA, veredictos con tu criterio y pago por revisión. 100% remoto, sede en Utah.",
+    "Join the network: AI-prepared immigration case files, verdicts signed by you, paid per case. 100% remote, incorporated in Utah. Únete a la red de revisión legal.",
 };
 
 export default function RootLayout({

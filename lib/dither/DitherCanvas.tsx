@@ -36,6 +36,8 @@ type Props = {
   layers?: DitherLayer[];
   /** bandas glitch aleatorias intermitentes (firma del original) */
   glitch?: boolean;
+  /** bandas glitch que siguen al cursor dentro del canvas */
+  interactive?: boolean;
   className?: string;
   label?: string;
 };
@@ -50,7 +52,15 @@ const DPR_CAP = 1.5;
 const GLITCH_VISIBLE_MS = 130;
 
 const DitherCanvas = forwardRef<DitherHandle, Props>(function DitherCanvas(
-  { src, mode = "dark", layers = [{}], glitch = false, className, label },
+  {
+    src,
+    mode = "dark",
+    layers = [{}],
+    glitch = false,
+    interactive = false,
+    className,
+    label,
+  },
   handleRef,
 ) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -107,7 +117,9 @@ const DitherCanvas = forwardRef<DitherHandle, Props>(function DitherCanvas(
     let ready = false;
     let visible = false;
     let glitchLayers: DitherLayer[] = [];
+    let hoverLayers: DitherLayer[] = [];
     let glitchTimer: ReturnType<typeof setTimeout> | null = null;
+    let hoverTimer: ReturnType<typeof setTimeout> | null = null;
     let destroyed = false;
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
@@ -154,8 +166,34 @@ const DitherCanvas = forwardRef<DitherHandle, Props>(function DitherCanvas(
       gl.clear(gl.COLOR_BUFFER_BIT);
       for (const layer of layersRef.current) drawLayer(layer, W, H);
       for (const layer of glitchLayers) drawLayer(layer, W, H);
+      for (const layer of hoverLayers) drawLayer(layer, W, H);
     };
     renderRef.current = render;
+
+    /* bandas que siguen al cursor: el visitante "interfiere" la señal */
+    let hoverRaf = 0;
+    const onPointerMove = (e: PointerEvent) => {
+      if (destroyed || !visible || hoverRaf) return;
+      hoverRaf = requestAnimationFrame(() => {
+        hoverRaf = 0;
+        const rect = canvas.getBoundingClientRect();
+        const py = (e.clientY - rect.top) / rect.height;
+        if (py < 0 || py > 1) return;
+        hoverLayers = [
+          { x: 0, w: 1, y: py - 0.012, h: 0.024, xSquares: 130, ySquares: 5, gold: true, bgOpacity: 0 },
+          { x: 0, w: 1, y: py + 0.03, h: 0.012, xSquares: 170, ySquares: 4, invert: true, bgOpacity: 0 },
+        ];
+        render();
+        if (hoverTimer) clearTimeout(hoverTimer);
+        hoverTimer = setTimeout(() => {
+          hoverLayers = [];
+          render();
+        }, 180);
+      });
+    };
+    const interactiveOn =
+      interactive && !reduced && window.matchMedia("(pointer: fine)").matches;
+    if (interactiveOn) window.addEventListener("pointermove", onPointerMove);
 
     const scheduleGlitch = () => {
       if (destroyed || reduced || !glitch) return;
@@ -230,12 +268,15 @@ const DitherCanvas = forwardRef<DitherHandle, Props>(function DitherCanvas(
       destroyed = true;
       renderRef.current = () => {};
       if (glitchTimer) clearTimeout(glitchTimer);
+      if (hoverTimer) clearTimeout(hoverTimer);
+      if (hoverRaf) cancelAnimationFrame(hoverRaf);
+      if (interactiveOn) window.removeEventListener("pointermove", onPointerMove);
       ro.disconnect();
       io.disconnect();
       gl.getExtension("WEBGL_lose_context")?.loseContext();
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [src, mode, glitch]);
+  }, [src, mode, glitch, interactive]);
 
   return (
     <canvas

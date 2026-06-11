@@ -1,29 +1,32 @@
-import { TESTIMONIALS } from "@/lib/content";
+"use client";
+
+import { useLang } from "@/lib/i18n";
 import styles from "./Testimonials.module.css";
 
-/** Testimonios editoriales — tarjetas de expediente resuelto. */
+/** Voces de la red — abogados freelance que ya revisan. */
 export default function Testimonials() {
+  const { dict } = useLang();
+  const t = dict.testimonials;
+
   return (
     <section data-theme="dark" className={`${styles.root} shell`}>
       <div className="comb" aria-hidden="true" />
-      <p className="section-label t-p6">La red habla</p>
+      <p className="section-label t-p6">{t.label}</p>
       <div className={styles.grid}>
-        {TESTIMONIALS.map((t, i) => (
+        {t.items.map((item, i) => (
           <figure
-            key={t.name}
+            key={item.name}
             className={styles.card}
             data-parallax={[6, 16, 10][i]}
           >
             <hr className="rule" data-reveal="line" />
             <blockquote className={`t-quote ${styles.quote}`} data-reveal="p">
-              “{t.quote}”
+              “{item.quote}”
             </blockquote>
             <figcaption className={styles.caption} data-reveal="ctn">
-              <span className="t-p5">{t.name}</span>
-              <span className="t-p6 t-muted">{t.detail}</span>
-              <span className={`t-p6 t-stamp ${styles.approved}`}>
-                [ Revisor activo ]
-              </span>
+              <span className="t-p5">{item.name}</span>
+              <span className="t-p6 t-muted">{item.detail}</span>
+              <span className={`t-p6 t-stamp ${styles.approved}`}>{t.stamp}</span>
             </figcaption>
           </figure>
         ))}

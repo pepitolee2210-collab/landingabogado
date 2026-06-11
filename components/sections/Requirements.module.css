@@ -1,0 +1,56 @@
+.root {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--u-72);
+  padding-block: var(--u-136);
+}
+
+.intro {
+  display: flex;
+  flex-direction: column;
+  gap: var(--u-24);
+  text-align: center;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  max-width: 86rem;
+  width: 100%;
+  margin-inline: auto;
+}
+
+.rowInner {
+  display: grid;
+  grid-template-columns: 6rem 1.6fr 1fr;
+  align-items: baseline;
+  gap: var(--u-32);
+  padding-block: var(--u-24);
+}
+
+.copy {
+  text-transform: none;
+  justify-self: end;
+  text-align: right;
+  max-width: 36ch;
+}
+
+/* el plus del español: dorado, el guiño a la causa */
+.plus {
+  color: var(--rock);
+  font-size: 0.5em;
+  vertical-align: 0.5em;
+}
+
+@media (max-width: 767px) {
+  .rowInner {
+    grid-template-columns: 1fr;
+    gap: var(--u-8);
+  }
+
+  .copy {
+    justify-self: start;
+    text-align: left;
+  }
+}

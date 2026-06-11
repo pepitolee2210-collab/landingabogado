@@ -1,8 +1,9 @@
 import Shell from "@/components/Shell";
 import Hero from "@/components/sections/Hero";
-import Prologue from "@/components/sections/Prologue";
+import Vision from "@/components/sections/Vision";
 import Manifesto from "@/components/sections/Manifesto";
 import Services from "@/components/sections/Services";
+import Requirements from "@/components/sections/Requirements";
 import Process from "@/components/sections/Process";
 import Stats from "@/components/sections/Stats";
 import Visas from "@/components/sections/Visas";
@@ -16,9 +17,10 @@ export default function Home() {
     <Shell>
       <main>
         <Hero />
-        <Prologue />
+        <Vision />
         <Manifesto />
         <Services />
+        <Requirements />
         <Process />
         <Stats />
         <Visas />

@@ -2,21 +2,15 @@
 
 import { useEffect, useRef } from "react";
 import { gsap, ScrollTrigger, DUR, prefersReducedMotion } from "@/lib/gsap";
+import { useLang, type Lang } from "@/lib/i18n";
+import { scrollToTarget } from "@/lib/scroll-bus";
 import SwapText from "@/components/fx/SwapText";
 import styles from "./Header.module.css";
 
-const LINKS = [
-  { label: "Plataforma", target: "#plataforma" },
-  { label: "Proceso", target: "#proceso" },
-  { label: "Módulos", target: "#modulos" },
-  { label: "Preguntas", target: "#preguntas" },
-] as const;
+const LANGS: Lang[] = ["en", "es"];
 
-export default function Header({
-  onNavigate,
-}: {
-  onNavigate: (selector: string) => void;
-}) {
+export default function Header() {
+  const { lang, dict, setLang } = useLang();
   const ref = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -70,18 +64,18 @@ export default function Header({
     <header ref={ref} className={styles.root} data-on="dark">
       <button
         className={`${styles.logo} t-p3`}
-        onClick={() => onNavigate("#inicio")}
-        aria-label="Volver al inicio"
+        onClick={() => scrollToTarget("#inicio")}
+        aria-label="Usalatino Prime — top"
       >
         Usalatino <span className={styles.star}>✦</span> Prime
       </button>
 
-      <nav className={styles.nav} aria-label="Secciones">
-        {LINKS.map((link) => (
+      <nav className={styles.nav} aria-label="Sections">
+        {dict.nav.links.map((link) => (
           <button
             key={link.target}
             className={`${styles.navLink} t-p6 swap-trigger`}
-            onClick={() => onNavigate(link.target)}
+            onClick={() => scrollToTarget(link.target)}
           >
             <SwapText text={link.label} />
           </button>
@@ -89,13 +83,24 @@ export default function Header({
       </nav>
 
       <div className={styles.right}>
-        <span className={`${styles.file} t-p6 t-muted`}>EXP № 2026-ULP</span>
+        <div className={styles.langs} role="group" aria-label="Language">
+          {LANGS.map((code) => (
+            <button
+              key={code}
+              className={`t-p6 ${styles.lang} ${lang === code ? styles.langActive : ""}`}
+              aria-pressed={lang === code}
+              onClick={() => setLang(code)}
+            >
+              {code.toUpperCase()}
+            </button>
+          ))}
+        </div>
         <button
           className="btn btn--gold"
           data-magnetic="30"
-          onClick={() => onNavigate("#consulta")}
+          onClick={() => scrollToTarget("#consulta")}
         >
-          Solicita acceso
+          {dict.nav.cta}
         </button>
       </div>
     </header>

@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import { gsap, prefersReducedMotion } from "@/lib/gsap";
-import { PROCESS } from "@/lib/content";
+import { useLang } from "@/lib/i18n";
 import styles from "./Process.module.css";
 
 /**
@@ -11,6 +11,8 @@ import styles from "./Process.module.css";
  * reduced-motion se muestra la lista estática.
  */
 export default function Process() {
+  const { dict } = useLang();
+  const t = dict.process;
   const rootRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -56,16 +58,17 @@ export default function Process() {
     <section ref={rootRef} id="proceso" data-theme="light" className={styles.outer}>
       <div className={styles.sticky}>
         <header className={styles.head}>
-          <p className="section-label t-p6">Cómo entras</p>
+          <p className="section-label t-p6">{t.label}</p>
           <h2 className="t-h2" data-reveal="h">
-            De tu licencia a tu primer <em>veredicto</em>
+            {t.titleA}
+            <em>{t.titleEm}</em>
           </h2>
         </header>
 
         <div className={styles.stage}>
           <div className={styles.rail} aria-hidden="true">
             <span className={styles.railFill} />
-            {PROCESS.map((step) => (
+            {t.steps.map((step) => (
               <span key={step.n} className={styles.dot}>
                 ✦
               </span>
@@ -73,7 +76,7 @@ export default function Process() {
           </div>
 
           <div className={styles.steps}>
-            {PROCESS.map((step) => (
+            {t.steps.map((step) => (
               <article key={step.n} className={styles.step}>
                 <span className={`t-num ${styles.num}`}>{step.n}</span>
                 <h3 className="t-h3">{step.title}</h3>
@@ -86,7 +89,7 @@ export default function Process() {
 
       {/* fallback estático: móvil y reduced-motion */}
       <ol className={styles.list}>
-        {PROCESS.map((step) => (
+        {t.steps.map((step) => (
           <li key={step.n} className={styles.row}>
             <hr className="rule" />
             <span className={`t-num ${styles.rowNum}`}>{step.n}</span>

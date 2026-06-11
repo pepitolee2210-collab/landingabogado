@@ -1,10 +1,16 @@
+"use client";
+
 import DitherCanvas from "@/lib/dither/DitherCanvas";
 import Marquee from "@/components/fx/Marquee";
+import { useLang } from "@/lib/i18n";
 import { CONTACT, FORM_CODES, IMG } from "@/lib/content";
 import styles from "./Footer.module.css";
 
-/** Cierre: marquee de formularios, contactos gigantes y arte dither final. */
+/** Cierre: marquee de formularios, mazo en tramas y contactos gigantes. */
 export default function Footer() {
+  const { dict } = useLang();
+  const t = dict.footer;
+
   return (
     <footer data-theme="dark" className={styles.root}>
       <Marquee items={FORM_CODES} />
@@ -12,23 +18,23 @@ export default function Footer() {
       <div className={`${styles.body} shell`}>
         <div className={styles.cols}>
           <div className={styles.col}>
-            <p className="t-p6 t-muted">La red</p>
-            {CONTACT.offices.map((office) => (
-              <p key={office} className="t-p5">
-                {office}
+            <p className="t-p6 t-muted">{t.network}</p>
+            {t.networkItems.map((item) => (
+              <p key={item} className="t-p5">
+                {item}
               </p>
             ))}
           </div>
           <div className={`${styles.col} ${styles.colRight}`}>
-            <p className="t-p6 t-muted">Síguenos</p>
+            <p className="t-p6 t-muted">{t.follow}</p>
+            <a className="t-p5 link-rule" href="https://linkedin.com" rel="noreferrer" target="_blank">
+              LinkedIn
+            </a>
             <a className="t-p5 link-rule" href="https://instagram.com" rel="noreferrer" target="_blank">
               Instagram
             </a>
             <a className="t-p5 link-rule" href="https://facebook.com" rel="noreferrer" target="_blank">
               Facebook
-            </a>
-            <a className="t-p5 link-rule" href="https://tiktok.com" rel="noreferrer" target="_blank">
-              TikTok
             </a>
           </div>
         </div>
@@ -37,9 +43,9 @@ export default function Footer() {
           src={IMG.footer}
           mode="dark"
           className={styles.scene}
-          label="Firma de documentos en arte de tramas"
+          label={t.sceneLabel}
           layers={[
-            { blackPoint: 40, whitePoint: 230, xSquares: 150, ySquares: 100, bgOpacity: 0 },
+            { blackPoint: 60, whitePoint: 150, xSquares: 150, ySquares: 100, bgOpacity: 0 },
           ]}
         />
 
@@ -58,10 +64,8 @@ export default function Footer() {
       </p>
 
       <div className={`${styles.legal} shell`}>
-        <span className="t-p6 t-muted">© 2026 Usalatino Prime · Utah</span>
-        <span className={`t-p6 t-muted ${styles.disclaimer}`}>
-          Plataforma de revisión profesional — requiere licencia activa
-        </span>
+        <span className="t-p6 t-muted">{t.copyright}</span>
+        <span className={`t-p6 t-muted ${styles.disclaimer}`}>{t.disclaimer}</span>
         <span className="t-p6 t-muted">EXP № 2026-ULP</span>
       </div>
 

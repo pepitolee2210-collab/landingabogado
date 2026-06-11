@@ -39,6 +39,10 @@
   text-transform: none;
 }
 
+.direct {
+  color: var(--gold);
+}
+
 /* card de papel — el documento físico */
 .paper {
   position: relative;
@@ -49,7 +53,7 @@
 }
 
 .paper::before {
-  content: "FORMULARIO ULP-AB · SOLICITUD DE ACREDITACIÓN";
+  content: attr(data-form-title);
   display: block;
   font-size: 0.694rem;
   letter-spacing: 0.14em;
