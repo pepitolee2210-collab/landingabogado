@@ -1,5 +1,17 @@
 # Project Status — USALATINO PRIME · Landing del SaaS de abogados
 
+## Convocatoria bilingüe 2026-06-11
+- [x] **i18n EN/ES**: diccionarios en `lib/i18n/` (EN primario), modal de idioma sobre el preloader en la primera visita (la cortina espera la elección), toggle EN/ES en el header, elección persistida en localStorage, `<html lang>` dinámico
+- [x] **Reestructura de convocatoria**: Hero (CTAs "Book a call with Henry" + "How it works") → **Vision** (quiénes somos, constituida en Salt Lake City UT, la causa de la comunidad latina, 3 facts) → Manifesto → Plataforma → **Requirements** (REQ-01..05: bar activo cualquier estado, sin experiencia, inglés para expedientes, español como plus ✦, pocas horas) → Proceso (llamada→verificación→onboarding 1h→cobrar) → Stats → Módulos → Testimonios → CTA (solicitud de llamada, horario preferido, henry@) → FAQ (freelance: cuánto gano, ¿es empleo?, etc.) → Footer
+- [x] **Storyboard procedural 100% a código** (`lib/dither/shapes.ts`): balanza de la justicia (hero) · multitud comunitaria (visión) · cordillera (manifesto) · colmena (stats) · arco (CTA) · mazo de juez (footer) — ya no hay ninguna foto externa
+- [x] Hero mejorado: glitch interactivo que sigue al cursor (`interactive` en DitherCanvas), tejido de entrada, CTAs magnéticos
+- [x] Build limpio · push a GitHub (d49f604)
+
+## Pendientes nuevos
+- [ ] Backend del formulario "call request" (Supabase + notificación a Henry) — hoy simula
+- [ ] Link real de calendario para Henry (Cal.com/Calendly) en el CTA
+- [ ] Deploy a Vercel
+
 ## Reconversión 2026-06-10 — landing B2B (reclutamiento de abogados)
 - [x] Nueva audiencia: **abogados de inmigración** que se unen a la red de revisión legal (el SaaS de `E:\Plataforma abogado\abogados-app`, deploy `abogados.usalatinoprime.com`)
 - [x] Contenido extraído del producto real: cola FIFO con lock, pre-revisión IA (Claude + playbook, semáforo), revisión split-screen, veredicto (validar / pedir correcciones + webhook), panel de ganancias (tarifa base **90 USD/revisión**, `tariff_per_review`), métricas, acreditación por invitación/cohortes
