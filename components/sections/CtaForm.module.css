@@ -1,0 +1,131 @@
+.root {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: var(--u-72);
+  align-items: center;
+  padding-block: var(--u-136);
+  overflow: clip;
+}
+
+/* el Arco Delicado: la puerta a la nueva vida, detrás del texto */
+.arch {
+  position: absolute;
+  left: -4%;
+  bottom: 0;
+  width: 56%;
+  height: 88%;
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+.head,
+.paper {
+  position: relative;
+}
+
+.head {
+  display: flex;
+  flex-direction: column;
+  gap: var(--u-24);
+}
+
+.head :global(.section-label) {
+  justify-content: flex-start;
+}
+
+.sub {
+  max-width: 44ch;
+  text-transform: none;
+}
+
+/* card de papel — el documento físico */
+.paper {
+  position: relative;
+  background: var(--paper);
+  color: var(--ink);
+  padding: var(--u-48);
+  box-shadow: 0.6rem 0.6rem 0 var(--paper-12);
+}
+
+.paper::before {
+  content: "FORMULARIO ULP-AB · SOLICITUD DE ACREDITACIÓN";
+  display: block;
+  font-size: 0.694rem;
+  letter-spacing: 0.14em;
+  opacity: 0.5;
+  border-bottom: 1px solid var(--ink-30);
+  padding-bottom: var(--u-12);
+  margin-bottom: var(--u-32);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--u-24);
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--u-8);
+}
+
+.input {
+  background: transparent;
+  border: 0;
+  border-bottom: 1px dashed var(--ink-30);
+  padding-block: var(--u-8);
+  color: inherit;
+  text-transform: none;
+}
+
+.input:focus {
+  outline: none;
+  border-bottom-color: var(--ink);
+}
+
+.input::placeholder {
+  color: var(--ink-30);
+}
+
+.submit {
+  background: var(--ink);
+  color: var(--paper);
+  align-self: flex-start;
+}
+
+.sentBox {
+  display: flex;
+  flex-direction: column;
+  gap: var(--u-24);
+  align-items: flex-start;
+}
+
+.stamp {
+  display: inline-block;
+  color: var(--stamp);
+  border: 3px double var(--stamp);
+  border-radius: 4px;
+  padding: var(--u-8) var(--u-16);
+  transform: rotate(-6deg);
+  animation: stamp-in var(--dur-m) var(--ease-out);
+}
+
+@keyframes stamp-in {
+  from {
+    opacity: 0;
+    transform: rotate(-6deg) scale(2.4);
+  }
+}
+
+@media (max-width: 767px) {
+  .root {
+    grid-template-columns: 1fr;
+    gap: var(--u-48);
+  }
+
+  .paper {
+    padding: var(--u-24);
+  }
+}

@@ -1,0 +1,150 @@
+.outer {
+  height: 280vh;
+}
+
+.sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow: clip;
+  display: grid;
+  place-items: center;
+}
+
+.frame {
+  position: absolute;
+  inset: 0;
+  clip-path: inset(0% 0% 0% 0%);
+  will-change: clip-path, transform;
+}
+
+.canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--u-24);
+  text-align: center;
+  width: 100%;
+  will-change: transform;
+}
+
+.scrim {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse 70% 55% at 50% 48%,
+    rgba(24, 31, 46, 0.78),
+    rgba(24, 31, 46, 0.25) 60%,
+    transparent 100%
+  );
+}
+
+.lockup {
+  position: relative;
+  display: inline-block;
+}
+
+.title {
+  font-size: 12.5rem;
+  text-shadow: 0 0 2.5rem rgba(15, 33, 72, 0.9);
+}
+
+.prime {
+  position: absolute;
+  right: -0.5em;
+  bottom: -0.12em;
+  font-family: var(--font-serif), serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 4.6rem;
+  line-height: 1;
+  color: var(--gold);
+  rotate: -5deg;
+  text-shadow: 0 0 1.5rem rgba(15, 33, 72, 0.9);
+}
+
+.labels {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  width: min(72rem, 92%);
+  margin-top: var(--u-32);
+  text-align: left;
+}
+
+.labels p:nth-child(2) {
+  text-align: center;
+}
+
+.labels p:last-child {
+  text-align: right;
+}
+
+.aside {
+  position: absolute;
+  z-index: 2;
+  inset: auto var(--u-32) var(--u-32) var(--u-32);
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+
+.hint {
+  display: flex;
+  align-items: center;
+  gap: var(--u-12);
+}
+
+.barcode {
+  width: 4rem;
+  height: 1.1rem;
+  background: repeating-linear-gradient(
+    90deg,
+    currentColor 0 2px,
+    transparent 2px 5px,
+    currentColor 5px 6px,
+    transparent 6px 11px
+  );
+  opacity: 0.7;
+}
+
+.badge {
+  color: var(--gold);
+}
+
+@media (max-width: 767px) {
+  .outer {
+    height: 200vh;
+  }
+
+  .title {
+    font-size: 3.4rem;
+  }
+
+  .prime {
+    font-size: 1.6rem;
+    right: -0.3em;
+  }
+
+  .labels {
+    grid-template-columns: 1fr;
+    gap: var(--u-12);
+    text-align: center;
+  }
+
+  .labels p,
+  .labels p:last-child {
+    text-align: center;
+  }
+
+  .badge {
+    display: none;
+  }
+}

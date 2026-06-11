@@ -1,0 +1,107 @@
+.root {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--u-24);
+  padding-block: var(--u-136);
+}
+
+.title {
+  text-align: center;
+}
+
+.panel {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: var(--u-72);
+  width: 100%;
+  margin-top: var(--u-72);
+  padding-top: var(--u-48);
+  border-top: 1px solid var(--ink-30);
+}
+
+.tabs {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--u-16);
+}
+
+.tab {
+  cursor: pointer;
+  opacity: 0.35;
+  transition: opacity var(--dur-s) var(--ease-out);
+  text-transform: uppercase;
+}
+
+.tab:hover {
+  opacity: 0.7;
+}
+
+.tabActive {
+  opacity: 1;
+}
+
+.detail {
+  display: flex;
+  flex-direction: column;
+  gap: var(--u-24);
+  animation: visa-in var(--dur-m) var(--ease-out);
+}
+
+.timeLabel {
+  border-bottom: 1px solid var(--ink-30);
+  padding-bottom: var(--u-8);
+  width: fit-content;
+}
+
+.time {
+  display: flex;
+  align-items: baseline;
+  gap: var(--u-16);
+}
+
+.timeNum {
+  color: var(--accent, var(--rock));
+}
+
+.tabActive span {
+  color: var(--accent, var(--rock));
+}
+
+.copy {
+  max-width: 52ch;
+  text-transform: none;
+  opacity: 0.75;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--u-8);
+  margin-top: var(--u-16);
+}
+
+@keyframes visa-in {
+  from {
+    opacity: 0;
+    transform: translateY(1.2rem);
+  }
+}
+
+@media (max-width: 767px) {
+  .panel {
+    grid-template-columns: 1fr;
+    gap: var(--u-32);
+  }
+
+  .tabs {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .tabs p {
+    width: 100%;
+  }
+}

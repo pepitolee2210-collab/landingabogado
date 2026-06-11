@@ -1,0 +1,52 @@
+.dot,
+.ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  pointer-events: none;
+  border-radius: 50%;
+}
+
+.dot {
+  width: 6px;
+  height: 6px;
+  margin: -3px 0 0 -3px;
+  background: var(--gold);
+  mix-blend-mode: difference;
+}
+
+.ring {
+  width: 34px;
+  height: 34px;
+  margin: -17px 0 0 -17px;
+  border: 1px solid var(--gold);
+  opacity: 0.7;
+  transition:
+    scale var(--dur-s) var(--ease-out),
+    opacity var(--dur-s) var(--ease-out);
+}
+
+.ring[data-active="true"] {
+  scale: 1.8;
+  opacity: 1;
+  border-style: dashed;
+  animation: ring-spin 6s linear infinite;
+}
+
+@keyframes ring-spin {
+  to {
+    rotate: 360deg;
+  }
+}
+
+:global(html.has-cursor) {
+  cursor: none;
+}
+
+:global(html.has-cursor) a,
+:global(html.has-cursor) button,
+:global(html.has-cursor) input,
+:global(html.has-cursor) select {
+  cursor: none;
+}

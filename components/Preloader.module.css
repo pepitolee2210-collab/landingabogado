@@ -1,0 +1,69 @@
+.root {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  display: grid;
+  place-items: center;
+}
+
+.grid {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-columns: repeat(16, 1fr);
+  grid-template-rows: repeat(10, 1fr);
+}
+
+.cell {
+  background: var(--ink);
+  outline: 1px solid var(--ink); /* cubre las costuras subpixel entre celdas */
+  transform-origin: left;
+}
+
+.content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--u-24);
+  color: var(--paper);
+  text-align: center;
+}
+
+.mark {
+  position: relative;
+  border-block: 1px solid var(--paper-30);
+  padding-block: var(--u-16);
+  font-size: 8rem;
+}
+
+.prime {
+  position: absolute;
+  right: -0.6em;
+  bottom: 0.05em;
+  font-family: var(--font-serif), serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 0.42em;
+  text-transform: none;
+  letter-spacing: 0;
+  color: var(--gold);
+  rotate: -5deg;
+}
+
+.pct {
+  color: var(--gold);
+}
+
+@media (max-width: 767px) {
+  .mark {
+    font-size: 2.6rem;
+  }
+}
+
+.foot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--u-8);
+}

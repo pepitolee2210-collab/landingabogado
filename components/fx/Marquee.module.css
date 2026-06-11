@@ -1,0 +1,30 @@
+.root {
+  overflow: clip;
+  border-block: 1px solid var(--fg-30, var(--paper-30));
+  padding-block: var(--u-12);
+}
+
+.track {
+  display: flex;
+  width: max-content;
+  will-change: transform;
+}
+
+.list {
+  display: flex;
+  flex-shrink: 0;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: var(--u-16);
+  padding-inline: var(--u-16);
+  white-space: nowrap;
+}
+
+.sep {
+  font-size: 0.6em;
+  color: var(--gold);
+}
+

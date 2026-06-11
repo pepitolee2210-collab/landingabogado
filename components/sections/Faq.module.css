@@ -1,0 +1,84 @@
+.root {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--u-24);
+  padding-block: var(--u-136);
+}
+
+.title {
+  text-align: center;
+  margin-bottom: var(--u-72);
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  max-width: 80rem;
+  width: 100%;
+  margin-inline: auto;
+}
+
+.q {
+  display: grid;
+  grid-template-columns: 4rem 1fr auto;
+  align-items: center;
+  gap: var(--u-24);
+  width: 100%;
+  padding-block: var(--u-24);
+  text-align: left;
+  cursor: pointer;
+}
+
+.qText {
+  transition: opacity var(--dur-s) var(--ease-out);
+}
+
+.q:hover .qText {
+  opacity: 0.65;
+}
+
+.plus {
+  font-family: var(--font-serif), serif;
+  font-size: 2rem;
+  line-height: 1;
+  transition: transform var(--dur-m) var(--ease-in-out);
+}
+
+.plusOpen {
+  transform: rotate(45deg);
+}
+
+.a {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows var(--dur-m) var(--ease-in-out);
+}
+
+.a[data-open] {
+  grid-template-rows: 1fr;
+}
+
+.aText {
+  overflow: clip;
+  min-height: 0; /* sin esto la fila 0fr del grid no colapsa */
+  max-width: 64ch;
+  padding-left: calc(4rem + var(--u-24));
+  text-transform: none;
+  opacity: 0.75;
+}
+
+.a[data-open] .aText {
+  padding-bottom: var(--u-24);
+}
+
+@media (max-width: 767px) {
+  .q {
+    grid-template-columns: 2.4rem 1fr auto;
+    gap: var(--u-12);
+  }
+
+  .aText {
+    padding-left: 0;
+  }
+}

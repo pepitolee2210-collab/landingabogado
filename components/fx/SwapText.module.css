@@ -1,0 +1,32 @@
+.root {
+  position: relative;
+  display: inline-block;
+  overflow: clip;
+}
+
+.rowA {
+  display: inline-flex;
+}
+
+.rowB {
+  position: absolute;
+  inset: 0;
+}
+
+.char {
+  display: inline-block;
+  transform: translateY(0);
+  transition: transform var(--dur-m) var(--ease-in-out);
+}
+
+.rowB .char {
+  transform: translateY(115%);
+}
+
+:global(.swap-trigger:hover) .rowA .char {
+  transform: translateY(-115%);
+}
+
+:global(.swap-trigger:hover) .rowB .char {
+  transform: translateY(0);
+}

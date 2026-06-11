@@ -1,0 +1,123 @@
+.root {
+  position: relative;
+  overflow: clip;
+  padding-top: var(--u-48);
+}
+
+.body {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--u-72);
+  padding-block: var(--u-72) var(--u-48);
+  min-height: 60vh;
+  justify-content: space-between;
+}
+
+.cols {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: space-between;
+}
+
+.col {
+  display: flex;
+  flex-direction: column;
+  gap: var(--u-8);
+}
+
+.colRight {
+  text-align: right;
+  align-items: flex-end;
+}
+
+.scene {
+  position: absolute;
+  inset: 10% 20% 15% 20%;
+  width: 60%;
+  height: 75%;
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+.contacts {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: var(--u-24);
+}
+
+.contact {
+  text-transform: lowercase;
+}
+
+/* cierre monumental: el wordmark a todo lo ancho */
+.outro {
+  position: relative;
+  font-size: 9.2rem;
+  text-align: center;
+  line-height: 1;
+  padding-top: var(--u-72);
+  white-space: nowrap;
+}
+
+.outroStar {
+  color: var(--gold);
+  font-size: 0.4em;
+  vertical-align: 0.5em;
+}
+
+.legal {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  gap: var(--u-16);
+  padding-block: var(--u-24);
+}
+
+@media (max-width: 767px) {
+  .outro {
+    font-size: 2.2rem;
+  }
+}
+
+/* cerca de barras dither con hilos dorados — eco del footer original */
+.fence {
+  height: 6rem;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--paper-30) 0 2px,
+    transparent 2px 7px,
+    var(--gold) 7px 9px,
+    transparent 9px 13px,
+    var(--paper-60) 13px 16px,
+    transparent 16px 23px,
+    var(--paper-30) 23px 24px,
+    transparent 24px 31px
+  );
+  mask-image: linear-gradient(to top, black 30%, transparent);
+}
+
+@media (max-width: 767px) {
+  .contacts {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .contact {
+    font-size: 1.6rem;
+  }
+
+  .scene {
+    inset: 32% 5% 28% 5%;
+    width: 90%;
+    height: 40%;
+    opacity: 0.3;
+  }
+
+  .disclaimer {
+    display: none;
+  }
+}

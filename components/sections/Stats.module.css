@@ -1,0 +1,46 @@
+.root {
+  position: relative;
+  overflow: clip;
+  padding-block: var(--u-136) calc(var(--u-136) * 1.6);
+}
+
+.scene {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.inner {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--u-104);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--u-32);
+}
+
+.cell {
+  display: flex;
+  flex-direction: column;
+  gap: var(--u-16);
+  border-left: 1px solid var(--paper-30);
+  padding-left: var(--u-24);
+}
+
+.label {
+  min-height: 2.6em;
+}
+
+@media (max-width: 767px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--u-48) var(--u-16);
+  }
+}

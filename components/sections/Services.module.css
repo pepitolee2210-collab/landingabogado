@@ -1,0 +1,136 @@
+.outer {
+  position: relative;
+  height: 320vh;
+}
+
+.sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow: clip;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--u-72);
+  padding-block: var(--header-h) var(--u-48);
+}
+
+.head {
+  display: flex;
+  flex-direction: column;
+  gap: var(--u-24);
+  text-align: center;
+}
+
+.track {
+  display: flex;
+  gap: var(--u-24);
+  padding-inline: var(--u-32);
+  width: max-content;
+  will-change: transform;
+}
+
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--u-16);
+  width: 26rem;
+  min-height: 24rem;
+  padding: var(--u-24);
+  border: 1px solid var(--ink-30);
+  background: transparent;
+  transition:
+    background var(--dur-m) var(--ease-out),
+    color var(--dur-m) var(--ease-out);
+}
+
+.card:hover {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.card:hover .copy {
+  opacity: 0.8;
+}
+
+.card:hover :global(.chip) {
+  border-color: var(--gold);
+  color: var(--gold);
+}
+
+.cardTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.copy {
+  margin-top: auto;
+  max-width: 30ch;
+  text-transform: none;
+}
+
+.plus {
+  position: absolute;
+  right: var(--u-24);
+  bottom: var(--u-16);
+  font-family: var(--font-serif), serif;
+  font-size: 2.2rem;
+  line-height: 1;
+  transition: transform var(--dur-m) var(--ease-in-out);
+}
+
+.card:hover .plus {
+  transform: rotate(90deg);
+  color: var(--gold);
+}
+
+.progress {
+  display: flex;
+  align-items: center;
+  gap: var(--u-24);
+  padding-inline: var(--u-32);
+}
+
+.progressLine {
+  flex: 1;
+  height: 1px;
+  background: var(--ink-12);
+  display: block;
+  position: relative;
+}
+
+.progressFill {
+  position: absolute;
+  inset: 0;
+  background: var(--rock);
+  transform: scaleX(0);
+  transform-origin: left;
+}
+
+@media (max-width: 767px) {
+  .outer {
+    height: auto;
+  }
+
+  .progress {
+    display: none;
+  }
+
+  .sticky {
+    position: static;
+    height: auto;
+  }
+
+  .track {
+    width: auto;
+    flex-direction: column;
+    padding-inline: var(--u-16);
+  }
+
+  .card {
+    width: 100%;
+    min-height: auto;
+  }
+}

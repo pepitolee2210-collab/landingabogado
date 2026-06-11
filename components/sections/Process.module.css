@@ -1,0 +1,140 @@
+.outer {
+  position: relative;
+  height: 420vh;
+}
+
+.sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--u-72);
+  padding: var(--header-h) var(--u-32) var(--u-48);
+  overflow: clip;
+}
+
+.head {
+  display: flex;
+  flex-direction: column;
+  gap: var(--u-24);
+  text-align: center;
+}
+
+.stage {
+  position: relative;
+  display: grid;
+  grid-template-columns: 4rem 1fr;
+  gap: var(--u-72);
+  min-height: 24rem;
+  max-width: 80rem;
+  width: 100%;
+  margin-inline: auto;
+}
+
+.rail {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding-block: var(--u-8);
+}
+
+.rail::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 50%;
+  width: 1px;
+  background: var(--ink-30);
+}
+
+.railFill {
+  position: absolute;
+  inset: 0 auto 0 50%;
+  width: 2px;
+  background: var(--gold);
+  transform-origin: top;
+  transform: scaleY(0);
+}
+
+.dot {
+  position: relative;
+  font-size: 1rem;
+  color: var(--ink-30);
+  background: var(--paper);
+  padding-block: var(--u-4);
+}
+
+.steps {
+  position: relative;
+}
+
+.step {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--u-24);
+  visibility: hidden;
+}
+
+.num {
+  font-size: 12rem;
+  line-height: 0.8;
+  opacity: 0.18;
+  position: absolute;
+  right: 0;
+  top: -0.05em;
+  pointer-events: none;
+}
+
+.copy {
+  max-width: 44ch;
+  text-transform: none;
+}
+
+/* fallback estático */
+.list {
+  display: none;
+  flex-direction: column;
+  gap: var(--u-32);
+  padding: var(--u-104) var(--u-16);
+}
+
+.row {
+  display: flex;
+  flex-direction: column;
+  gap: var(--u-12);
+}
+
+.rowNum {
+  opacity: 0.3;
+}
+
+@media (max-width: 767px) {
+  .outer {
+    height: auto;
+  }
+
+  .sticky {
+    display: none;
+  }
+
+  .list {
+    display: flex;
+  }
+}
+
+:global(html.reduced-motion) .outer {
+  height: auto;
+}
+
+:global(html.reduced-motion) .sticky {
+  display: none;
+}
+
+:global(html.reduced-motion) .list {
+  display: flex;
+}

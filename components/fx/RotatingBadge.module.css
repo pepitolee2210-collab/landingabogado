@@ -1,0 +1,47 @@
+.root {
+  position: relative;
+  width: 11rem;
+  height: 11rem;
+  display: grid;
+  place-items: center;
+}
+
+.root::before {
+  content: "";
+  position: absolute;
+  inset: 12%;
+  border: 1px dashed currentColor;
+  border-radius: 50%;
+  opacity: 0.4;
+}
+
+.spin {
+  position: absolute;
+  inset: 0;
+  animation: badge-spin 16s linear infinite;
+}
+
+.text {
+  font-family: var(--font-doto), monospace;
+  font-size: 8.4px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  fill: currentColor;
+}
+
+.star {
+  font-size: 1.4rem;
+}
+
+@keyframes badge-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .spin {
+    animation: none;
+  }
+}
